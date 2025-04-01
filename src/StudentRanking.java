@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-class Student{
+class Student implements Comparable<Student>{
     private final String name;
     private final double gpa;
 
@@ -16,6 +14,32 @@ class Student{
     }
     public double getGPA() {
         return gpa;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Student student = (Student) obj;
+        return Double.compare(gpa, student.gpa) == 0 && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gpa);
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return Double.compare(o.getGPA(), this.getGPA());
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", gpa=" + gpa +
+                '}';
     }
 }
 
